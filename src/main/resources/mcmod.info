@@ -2,7 +2,7 @@
   {
     "modid": "${modId}",
     "name": "${modName}",
-    "description": "Adds a simple machine to take your anger out on villagers. Oh, and you can eat them too.",
+    "description": "Have you ever wanted to eat a villager before? With this mod, now you can!",
     "version": "${modVersion}",
     "mcversion": "${minecraftVersion}",
     "url": "https://github.com/starturtle27/VillagerMincer-1.7.10",
