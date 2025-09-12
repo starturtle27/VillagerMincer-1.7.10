@@ -53,8 +53,8 @@ public class VillagerMincer {
     public void Init(FMLInitializationEvent event) {
         superMincer = (new BlockSuperMincer(superMincerID)).setHardness(1.5F)
             .setResistance(10.0F)
-            .setCreativeTab(CreativeTabs.tabFood);
-        setUnLocalizeNameAndIconPass(Item.getItemFromBlock(superMincer), "mincer");
+            .setCreativeTab(CreativeTabs.tabDecorations);
+        setUnLocalizeNameAndIconPass(superMincer, "mincer");
         GameRegistry.registerBlock(superMincer, "superMincer");
         GameRegistry.registerTileEntity(TileEntitySuperMincer.class, "TileEntitySuperMincer");
         strangeMeat = (ItemMeatCan) (new ItemMeatCan(strangeMeatID, 4, 0.1F, true))
@@ -70,7 +70,7 @@ public class VillagerMincer {
             new PotionEffect(Potion.confusion.id, 1200, 1));
         meatCan.setAlwaysEdible();
         setUnLocalizeNameAndIconPass(meatCan, "meatCan");
-        // emptyCan = (new Item(emptyCanID)).setCreativeTab(CreativeTabs.tabFood);
+        emptyCan = (new Item()).setCreativeTab(CreativeTabs.tabFood);
         setUnLocalizeNameAndIconPass(emptyCan, "emptyCan");
         emeraldCan = (ItemMeatCan) (new ItemMeatCan(emeraldCanID, 6, 0.1F, true))
             .setPotionEffect(Potion.hunger.id, 60, 1, 1.0F)
@@ -109,10 +109,10 @@ public class VillagerMincer {
             new Object[] { "IQI", "IEI", "IQI", 'I', Items.quartz, 'Q', Items.iron_ingot, 'E', Items.emerald });
     }
 
-    // public static void setUnLocalizeNameAndIconPass(Block block, String pass) {
-    // block.setTextureName("VillagerMincer:" + pass);
-    // block.setUnlocalizedName("VillagerMincer:" + pass);
-    // }
+    public static void setUnLocalizeNameAndIconPass(Block block, String pass) {
+        block.setBlockTextureName("VillagerMincer:" + pass);
+        block.setBlockName("VillagerMincer:" + pass);
+    }
 
     public static void setUnLocalizeNameAndIconPass(Item item, String pass) {
         item.setTextureName("VillagerMincer:" + pass);
