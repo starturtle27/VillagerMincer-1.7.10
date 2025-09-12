@@ -1,92 +1,99 @@
-//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "Z:\home\aaron\Files\Minecraft Stuff\Mods\Mod Code Stuff\mcp811\conf"!
-
 package com.starturtle27.villagermincer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSuperMincer extends BlockContainer {
-   @SideOnly(Side.CLIENT)
-   private Icon top;
-   @SideOnly(Side.CLIENT)
-   private Icon side;
-   @SideOnly(Side.CLIENT)
-   private Icon bottom;
 
-   public BlockSuperMincer(int par1) {
-      super(par1, Material.rock);
-      this.setTickRandomly(true);
-      this.setCreativeTab(VillagerMincer.tab);
-   }
+    @SideOnly(Side.CLIENT)
+    private IIcon top;
+    @SideOnly(Side.CLIENT)
+    private IIcon side;
+    @SideOnly(Side.CLIENT)
+    private IIcon bottom;
 
-   @SideOnly(Side.CLIENT)
-   public void registerIcons(IconRegister par1IconRegister) {
-      this.side = par1IconRegister.registerIcon(this.getTextureName());
-      this.top = par1IconRegister.registerIcon(this.getTextureName() + "_top");
-      this.bottom = par1IconRegister.registerIcon(this.getTextureName() + "_bottom");
-   }
+    public BlockSuperMincer(int par1) {
+        super(Material.rock);
+        this.setTickRandomly(true);
+    }
 
-   public Icon getIcon(int par1, int par2) {
-      if (par1 == 1) {
-         return this.top;
-      } else {
-         return par1 == 0 ? this.bottom : this.side;
-      }
-   }
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister par1IconRegister) {
+        this.side = par1IconRegister.registerIcon(this.getTextureName());
+        this.top = par1IconRegister.registerIcon(this.getTextureName() + "_top");
+        this.bottom = par1IconRegister.registerIcon(this.getTextureName() + "_bottom");
+    }
 
-   public TileEntity createNewTileEntity(World par1World) {
-      return new TileEntitySuperMincer();
-   }
+    @Override
+    public IIcon getIcon(int par1, int par2) {
+        if (par1 == 1) {
+            return this.top;
+        } else {
+            return par1 == 0 ? this.bottom : this.side;
+        }
+    }
 
-   public int tickRate(World par1World) {
-      return 30;
-   }
+    public TileEntity createNewTileEntity(World par1World) {
+        return new TileEntitySuperMincer();
+    }
 
-   public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-      TileEntity tile = world.getBlockTileEntity(x, y, z);
-      if (tile != null && tile instanceof TileEntitySuperMincer && entity.posY > (double)y) {
-         TileEntitySuperMincer mincer = (TileEntitySuperMincer)tile;
-         if (mincer.getVillager() == null && entity instanceof EntityVillager) {
-            entity.posX = (double)x;
-            entity.posY = (double)(y + 1);
-            entity.posZ = (double)z;
-            mincer.setVilager((EntityVillager)entity);
-         }
-      }
+    public int tickRate(World par1World) {
+        return 30;
+    }
 
-   }
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile != null && tile instanceof TileEntitySuperMincer && entity.posY > (double) y) {
+            TileEntitySuperMincer mincer = (TileEntitySuperMincer) tile;
+            if (mincer.getVillager() == null && entity instanceof EntityVillager) {
+                entity.posX = (double) x;
+                entity.posY = (double) (y + 1);
+                entity.posZ = (double) z;
+                mincer.setVillager((EntityVillager) entity);
+            }
+        }
 
-   public boolean isOpaqueCube() {
-      return false;
-   }
+    }
 
-   public void randomDisplayTick(World world, int x, int y, int z, Random rnd) {
-      TileEntity tile = world.getBlockTileEntity(x, y, z);
-      if (tile != null && tile instanceof TileEntitySuperMincer) {
-         TileEntitySuperMincer mincer = (TileEntitySuperMincer)tile;
-         if (mincer.getVillager() != null && mincer.getRunTime() > 5 && rnd.nextInt(2) == 0) {
-            double d1 = (double)((float)x + rnd.nextFloat());
-            double d2 = (double)y + 2.0D;
-            double d3 = (double)((float)z + rnd.nextFloat());
-            world.spawnParticle("lava", d1, d2, d3, 0.0D, 0.0D, 0.0D);
-         }
-      }
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-      double d4 = (double)((float)x + rnd.nextFloat());
-      double d5 = (double)y - 1.05D;
-      double d6 = (double)((float)z + rnd.nextFloat());
-      if (world.getBlockId(x, y - 1, z) == this.blockID) {
-         world.spawnParticle("dripLava", d4, d5, d6, 0.0D, 0.0D, 0.0D);
-      }
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random rnd) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile != null && tile instanceof TileEntitySuperMincer) {
+            TileEntitySuperMincer mincer = (TileEntitySuperMincer) tile;
+            if (mincer.getVillager() != null && mincer.getRunTime() > 5 && rnd.nextInt(2) == 0) {
+                double d1 = (double) ((float) x + rnd.nextFloat());
+                double d2 = (double) y + 2.0D;
+                double d3 = (double) ((float) z + rnd.nextFloat());
+                world.spawnParticle("lava", d1, d2, d3, 0.0D, 0.0D, 0.0D);
+            }
+        }
 
-   }
+        double d4 = (double) ((float) x + rnd.nextFloat());
+        double d5 = (double) y - 1.05D;
+        double d6 = (double) ((float) z + rnd.nextFloat());
+        if (world.getBlock(x, y - 1, z) == this) {
+            world.spawnParticle("dripLava", d4, d5, d6, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntitySuperMincer();
+    }
 }
