@@ -19,7 +19,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "VillagerMincer", name = "VillagerMincer", version = "1.7.10"
+@Mod(modid = "villagermincer", name = "villagermincer", version = "1.7.10"
 
 )
 public class VillagerMincer {
