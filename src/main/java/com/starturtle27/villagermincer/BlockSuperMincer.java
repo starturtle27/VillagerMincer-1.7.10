@@ -29,7 +29,7 @@ public class BlockSuperMincer extends BlockContainer {
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.side = par1IconRegister.registerIcon(this.getTextureName());
         this.top = par1IconRegister.registerIcon(this.getTextureName() + "_top");
         this.bottom = par1IconRegister.registerIcon(this.getTextureName() + "_bottom");
