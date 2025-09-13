@@ -54,7 +54,6 @@ public class VillagerMincer {
         superMincer = (new BlockSuperMincer(superMincerID)).setHardness(1.5F)
             .setResistance(10.0F)
             .setCreativeTab(CreativeTabs.tabDecorations);
-        setUnLocalizeNameAndIconPass(superMincer, "mincer");
         GameRegistry.registerBlock(superMincer, "superMincer");
         GameRegistry.registerTileEntity(TileEntitySuperMincer.class, "TileEntitySuperMincer");
         strangeMeat = (ItemMeatCan) (new ItemMeatCan(strangeMeatID, 4, 0.1F, true))
@@ -63,15 +62,15 @@ public class VillagerMincer {
             .addPotionEffect(new PotionEffect(Potion.hunger.id, 600, 1), new PotionEffect(Potion.confusion.id, 600, 0));
         strangeMeat.setAlwaysEdible()
             .setMaxStackSize(64);
-        setUnLocalizeNameAndIconPass(strangeMeat, "meat");
+        // setUnLocalizeNameAndIconPass(strangeMeat, "meat");
         meatCan = (ItemMeatCan) (new ItemMeatCan(meatCanID, 6, 0.1F, true)).setCreativeTab(CreativeTabs.tabFood);
         meatCan.addPotionEffect(
             new PotionEffect(Potion.hunger.id, 1200, 2),
             new PotionEffect(Potion.confusion.id, 1200, 1));
         meatCan.setAlwaysEdible();
-        setUnLocalizeNameAndIconPass(meatCan, "meatCan");
+        // setUnLocalizeNameAndIconPass(meatCan, "meatCan");
         emptyCan = (new Item()).setCreativeTab(CreativeTabs.tabFood);
-        setUnLocalizeNameAndIconPass(emptyCan, "emptyCan");
+        // setUnLocalizeNameAndIconPass(emptyCan, "emptyCan");
         emeraldCan = (ItemMeatCan) (new ItemMeatCan(emeraldCanID, 6, 0.1F, true))
             .setPotionEffect(Potion.hunger.id, 60, 1, 1.0F)
             .setPotionEffect(Potion.confusion.id, 60, 0, 1.0F)
@@ -81,14 +80,14 @@ public class VillagerMincer {
             new PotionEffect(Potion.confusion.id, 1200, 1),
             new PotionEffect(Potion.poison.id, 1200, 1));
         emeraldCan.setAlwaysEdible();
-        setUnLocalizeNameAndIconPass(emeraldCan, "emeraldCan");
+        // setUnLocalizeNameAndIconPass(emeraldCan, "emeraldCan");
         superEmeraldCan = (ItemMeatCan) (new ItemMeatCan(superEmeraldCanID, 120, 0.1F, true))
             .setPotionEffect(Potion.hunger.id, 2400, 5, 5.0F)
             .setPotionEffect(Potion.wither.id, 600, 50, 5.0F)
             .setPotionEffect(Potion.poison.id, 600, 50, 5.0F)
             .setCreativeTab(CreativeTabs.tabFood);
         superEmeraldCan.setAlwaysEdible();
-        setUnLocalizeNameAndIconPass(superEmeraldCan, "superEmeraldCan");
+        // setUnLocalizeNameAndIconPass(superEmeraldCan, "superEmeraldCan");
         this.recipe();
         proxy.init();
     }
@@ -107,16 +106,6 @@ public class VillagerMincer {
         GameRegistry.addRecipe(
             new ItemStack(superMincer, 2),
             new Object[] { "IQI", "IEI", "IQI", 'I', Items.quartz, 'Q', Items.iron_ingot, 'E', Items.emerald });
-    }
-
-    public static void setUnLocalizeNameAndIconPass(Block block, String pass) {
-        block.setBlockTextureName("VillagerMincer:" + pass);
-        block.setBlockName("VillagerMincer:" + pass);
-    }
-
-    public static void setUnLocalizeNameAndIconPass(Item item, String pass) {
-        item.setTextureName("VillagerMincer:" + pass);
-        item.setUnlocalizedName("VillagerMincer:" + pass);
     }
 
     @SideOnly(Side.CLIENT)

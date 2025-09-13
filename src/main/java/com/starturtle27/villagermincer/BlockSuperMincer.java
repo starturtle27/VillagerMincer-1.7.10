@@ -26,6 +26,8 @@ public class BlockSuperMincer extends BlockContainer {
     public BlockSuperMincer(int par1) {
         super(Material.rock);
         this.setTickRandomly(true);
+        this.setBlockName("mincer");
+        this.setBlockTextureName("VillagerMincer:mincer");
     }
 
     @SideOnly(Side.CLIENT)
