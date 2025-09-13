@@ -36,6 +36,7 @@ public class TileEntitySuperMincer extends TileEntity {
         this.runTime = time;
     }
 
+    @Override
     public void updateEntity() {
         super.updateEntity();
         if (this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord) == VillagerMincer.superMincer) {
@@ -64,22 +65,21 @@ public class TileEntitySuperMincer extends TileEntity {
 
     public EntityVillager getOnVillagerWalking() {
         AxisAlignedBB aa = AxisAlignedBB
-            .getBoundingBox(
-                (double) this.xCoord,
-                (double) this.yCoord,
-                (double) this.zCoord,
-                (double) this.xCoord,
-                (double) (this.yCoord + 1),
-                (double) this.zCoord)
-            .expand(1.5D, 1.0D, 1.5D);
+                .getBoundingBox(
+                        this.xCoord,
+                        this.yCoord,
+                        this.zCoord,
+                        this.xCoord,
+                        this.yCoord + 1,
+                        this.zCoord)
+                .expand(1.5D, 1.0D, 1.5D);
         List list = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, aa);
         Iterator i = list.iterator();
 
         Entity entity;
         do {
-            if (!i.hasNext()) {
+            if (!i.hasNext())
                 return null;
-            }
 
             entity = (Entity) i.next();
         } while (!(entity instanceof EntityVillager));
@@ -91,17 +91,17 @@ public class TileEntitySuperMincer extends TileEntity {
         ++this.damageCount;
         if (this.damageCount == 5 && this.villager != null) {
             EntityItem item = new EntityItem(
-                this.worldObj,
-                (double) this.xCoord,
-                (double) this.yCoord - 1.5D,
-                (double) this.zCoord,
-                new ItemStack(VillagerMincer.strangeMeat));
+                    this.worldObj,
+                    this.xCoord,
+                    this.yCoord - 1.5D,
+                    this.zCoord,
+                    new ItemStack(VillagerMincer.strangeMeat));
             EntityItem em = new EntityItem(
-                this.worldObj,
-                (double) this.xCoord,
-                (double) this.yCoord - 1.5D,
-                (double) this.zCoord,
-                new ItemStack(Items.emerald));
+                    this.worldObj,
+                    this.xCoord,
+                    this.yCoord - 1.5D,
+                    this.zCoord,
+                    new ItemStack(Items.emerald));
             if (!this.worldObj.isRemote) {
                 this.worldObj.spawnEntityInWorld(item);
                 if (this.rnd.nextInt(3) == 0) {

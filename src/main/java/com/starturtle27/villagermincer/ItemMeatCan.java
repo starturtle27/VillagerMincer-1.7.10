@@ -18,25 +18,29 @@ public class ItemMeatCan extends ItemFood {
     public ItemMeatCan(int par1, int par2, boolean par3) {
         super(par1, par2, par3);
         this.setMaxStackSize(1);
+        this.setUnlocalizedName("meat");
+        this.setTextureName("VillagerMincer:meat");
+        this.setCreativeTab(CreativeTabs.tabFood);
     }
 
-    public ItemMeatCan(int par1, int par2, float par3, boolean par4) {
+    public ItemMeatCan(int par1, int par2, float par3, boolean par4, String name) {
         super(6, 0.1F, true);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.tabFood);
-        this.setUnlocalizedName("meat");
-        this.setTextureName("VillagerMincer:meat");
+        this.setUnlocalizedName(name);
+        this.setTextureName("VillagerMincer:" + name);
 
     }
 
     public Item addPotionEffect(PotionEffect... effect) {
-        for (int l = 0; l < effect.length; ++l) {
-            this.potionEffect.add(effect[l]);
+        for (PotionEffect element : effect) {
+            this.potionEffect.add(element);
         }
 
         return this;
     }
 
+    @Override
     public ItemStack onEaten(ItemStack item, World world, EntityPlayer player) {
         super.onEaten(item, world, player);
         if (item.getItem() == VillagerMincer.superEmeraldCan) {
@@ -44,8 +48,8 @@ public class ItemMeatCan extends ItemFood {
         }
 
         if (this.potionEffect != null) {
-            for (int length = 0; length < this.potionEffect.size(); ++length) {
-                player.addPotionEffect((PotionEffect) this.potionEffect.get(length));
+            for (PotionEffect element : this.potionEffect) {
+                player.addPotionEffect(element);
             }
         }
 
