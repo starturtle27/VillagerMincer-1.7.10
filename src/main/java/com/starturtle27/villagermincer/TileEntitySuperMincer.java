@@ -66,12 +66,12 @@ public class TileEntitySuperMincer extends TileEntity {
     public EntityVillager getOnVillagerWalking() {
         AxisAlignedBB aa = AxisAlignedBB
                 .getBoundingBox(
-                        this.xCoord,
-                        this.yCoord,
-                        this.zCoord,
-                        this.xCoord,
-                        this.yCoord + 1,
-                        this.zCoord)
+                        (double)  this.xCoord,
+                        (double)  this.yCoord,
+                        (double)  this.zCoord,
+                        (double)  this.xCoord,
+                        (double)  this.yCoord + 1,
+                        (double)  this.zCoord)
                 .expand(1.5D, 1.0D, 1.5D);
         List list = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, aa);
         Iterator i = list.iterator();
@@ -92,15 +92,15 @@ public class TileEntitySuperMincer extends TileEntity {
         if (this.damageCount == 5 && this.villager != null) {
             EntityItem item = new EntityItem(
                     this.worldObj,
-                    this.xCoord,
-                    this.yCoord - 1.5D,
-                    this.zCoord,
+                    (double)  this.xCoord,
+                    (double)   this.yCoord - 1.5D,
+                    (double)   this.zCoord,
                     new ItemStack(VillagerMincer.strangeMeat));
             EntityItem em = new EntityItem(
                     this.worldObj,
-                    this.xCoord,
-                    this.yCoord - 1.5D,
-                    this.zCoord,
+                    (double)   this.xCoord,
+                    (double)   this.yCoord - 1.5D,
+                    (double)   this.zCoord,
                     new ItemStack(Items.emerald));
             if (!this.worldObj.isRemote) {
                 this.worldObj.spawnEntityInWorld(item);
