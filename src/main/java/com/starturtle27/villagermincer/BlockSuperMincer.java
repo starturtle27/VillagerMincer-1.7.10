@@ -40,12 +40,9 @@ public class BlockSuperMincer extends BlockContainer {
 
     @Override
     public IIcon getIcon(int par1, int par2) {
-        if (par1 == 1)
-            return this.top;
-        else
-            return par1 == 0 ? this.bottom : this.side;
+        if (par1 == 1) return this.top;
+        else return par1 == 0 ? this.bottom : this.side;
     }
-
 
     @Override
     public int tickRate(World par1World) {
