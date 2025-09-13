@@ -3,4 +3,4 @@ A port of the VillagerMincer mod from 1.6.2 to 1.7.10.
 
 # Credits
 * _jx for making the original mod.
-*  Brandonbr1 for helping a lot during this mod's development.
+* VortexBlender for helping a lot during this mod's development.

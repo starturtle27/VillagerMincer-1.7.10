@@ -30,6 +30,7 @@ public class BlockSuperMincer extends BlockContainer {
         this.setBlockTextureName("VillagerMincer:mincer");
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.side = par1IconRegister.registerIcon(this.getTextureName());
@@ -39,17 +40,14 @@ public class BlockSuperMincer extends BlockContainer {
 
     @Override
     public IIcon getIcon(int par1, int par2) {
-        if (par1 == 1) {
+        if (par1 == 1)
             return this.top;
-        } else {
+        else
             return par1 == 0 ? this.bottom : this.side;
-        }
     }
 
-    public TileEntity createNewTileEntity(World par1World) {
-        return new TileEntitySuperMincer();
-    }
 
+    @Override
     public int tickRate(World par1World) {
         return 30;
     }
@@ -57,11 +55,11 @@ public class BlockSuperMincer extends BlockContainer {
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile != null && tile instanceof TileEntitySuperMincer && entity.posY > (double) y) {
+        if (tile != null && tile instanceof TileEntitySuperMincer && entity.posY > y) {
             TileEntitySuperMincer mincer = (TileEntitySuperMincer) tile;
             if (mincer.getVillager() == null && entity instanceof EntityVillager) {
                 entity.posX = (double) x;
-                entity.posY = (double) (y + 1);
+                entity.posY = (double) y + 1;
                 entity.posZ = (double) z;
                 mincer.setVillager((EntityVillager) entity);
             }
@@ -69,6 +67,7 @@ public class BlockSuperMincer extends BlockContainer {
 
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -79,16 +78,16 @@ public class BlockSuperMincer extends BlockContainer {
         if (tile != null && tile instanceof TileEntitySuperMincer) {
             TileEntitySuperMincer mincer = (TileEntitySuperMincer) tile;
             if (mincer.getVillager() != null && mincer.getRunTime() > 5 && rnd.nextInt(2) == 0) {
-                double d1 = (double) ((float) x + rnd.nextFloat());
-                double d2 = (double) y + 2.0D;
-                double d3 = (double) ((float) z + rnd.nextFloat());
+                double d1 = x + rnd.nextFloat();
+                double d2 = y + 2.0D;
+                double d3 = z + rnd.nextFloat();
                 world.spawnParticle("lava", d1, d2, d3, 0.0D, 0.0D, 0.0D);
             }
         }
 
-        double d4 = (double) ((float) x + rnd.nextFloat());
-        double d5 = (double) y - 1.05D;
-        double d6 = (double) ((float) z + rnd.nextFloat());
+        double d4 = x + rnd.nextFloat();
+        double d5 = y - 1.05D;
+        double d6 = z + rnd.nextFloat();
         if (world.getBlock(x, y - 1, z) == this) {
             world.spawnParticle("dripLava", d4, d5, d6, 0.0D, 0.0D, 0.0D);
         }
